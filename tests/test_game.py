@@ -151,4 +151,4 @@ def test_cli_reads_input_and_writes_exact_expected_board(tmp_path):
     assert output_file.read_text(encoding="utf-8") == ".....\n..x..\n..x..\n..x..\n.....\n"
 def test_always_passes_for_ci():
             """This test shows that CI is working"""
-            assert 2 - 2 == 4
+            assert 2 + 2 == 4
