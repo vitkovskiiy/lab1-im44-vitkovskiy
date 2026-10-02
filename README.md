@@ -49,4 +49,4 @@ python main.py input.txt output.txt
 
 ## Video Demo
 
-<link>
+![Video](defend.mp4)
