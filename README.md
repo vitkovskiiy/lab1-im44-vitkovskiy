@@ -49,4 +49,4 @@ python main.py input.txt output.txt
 
 ## Демо-відео
 
-<ВСТАВЛЮ ПОСИЛАННЯ НА ВІДЕО>
+https://github.com/user-attachments/assets/ce5d332d-041f-4520-858b-602ac2640529
