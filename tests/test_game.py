@@ -94,9 +94,9 @@ def test_empty_and_full_fields_have_expected_next_state(rows):
 @pytest.mark.parametrize(
     "grid, expected",
     [
-        (board("x"), board(".")), 
-        (board("x..."), board("xx.x")), 
-        (board("x", ".", ".", "."), board("x", "x", ".", "x")), 
+        (board("x"), board(".")),  # 1×1: усі вісім зсувів повертаються до тієї самої клітинки.
+        (board("x..."), board("xx.x")),  # 1×N: перевіряю повторення сусідів через верхній і нижній краї.
+        (board("x", ".", ".", "."), board("x", "x", ".", "x")),  # N×1: перевіряю повторення зсувів по ширині.
         (board("x...", "....", "....", "...."), board("....", "....", "....", "....")),
         (board("x.", "..", ".."), board("..", "..", "..")),
         (board("x....", ".....", "....."), board(".....", ".....", ".....")),
@@ -121,15 +121,15 @@ def test_parser_accepts_whitespace_and_trailing_blank_lines():
 @pytest.mark.parametrize(
     "content, message",
     [
-        ("", "Ожидаются"),
-        ("abc\n2 2\n..\n..", "поколений"),
-        ("-1\n2 2\n..\n..", "неотрицательным"),
-        ("1\n2\n..\n..", "ширину и высоту"),
-        ("1\na 2\n..\n..", "целыми"),
-        ("1\n0 2\n\n\n", "положительными"),
-        ("1\n2 3\n..\n..", "Ожидалось 3 строк"),
-        ("1\n2 1\n...", "ожидалась ширина 2"),
-        ("1\n2 1\n.a", "только символы"),
+        ("", "Очікуються"),
+        ("abc\n2 2\n..\n..", "Кількість поколінь"),
+        ("-1\n2 2\n..\n..", "невід’ємною"),
+        ("1\n2\n..\n..", "ширину та висоту"),
+        ("1\na 2\n..\n..", "цілими числами"),
+        ("1\n0 2\n\n\n", "додатними"),
+        ("1\n2 3\n..\n..", "кількість рядків поля: 3"),
+        ("1\n2 1\n...", "очікувана ширина 2"),
+        ("1\n2 1\n.a", "дозволені лише символи"),
     ],
 )
 def test_parser_rejects_invalid_input_with_actionable_error(content, message):
@@ -149,3 +149,8 @@ def test_cli_reads_input_and_writes_exact_expected_board(tmp_path):
     )
     assert result.returncode == 0, result.stderr
     assert output_file.read_text(encoding="utf-8") == ".....\n..x..\n..x..\n..x..\n.....\n"
+
+
+
+
+
